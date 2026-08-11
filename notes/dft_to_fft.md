@@ -57,7 +57,7 @@ $$
 
 Whilst the claim that a "series" is a better name may be true, a discrete Fourier transform is still a transform. This becomes clearer when we look at the linear algebraic definition of the DFT. A linear algebraic representation of a DFT is a matrix multiplication of the following form:
 
-$$
+```math
 \begin{bmatrix}
     X[0]\\
     X[1]\\
@@ -80,7 +80,7 @@ $$
     \vdots\\
     x[N-1]
 \end{bmatrix}
-$$
+```
 
 where
 
