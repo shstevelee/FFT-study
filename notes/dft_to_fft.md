@@ -396,3 +396,5 @@ $$
 rather than padding to 1024. Whether this is actually preferable depends on the hardware constraints: a 1024-point radix-2/4/8 FFT may use more arithmetic operations but have a much simpler and more regular architecture, while a 1000-point mixed-radix FFT avoids computing the extra 24 points at the cost of more complicated radix-5 stages and potentially more complicated control and memory access.
 
 **Now that we've covered the theoretical background of DFTs and FFTs, let's see their implementations in practice and compare!**
+
+Note: This file was checked for mathematical and engineering correctness and subsequently edited with the assistance of an AI model.
