@@ -102,19 +102,19 @@ Thus, scaling $F_N$ by $1/\sqrt{N}$ produces a unitary matrix. This means that t
 
 When using the standard unscaled $F_N$, this preservation of length manifests as _Parseval's Theorem_:
 
-$$
-\sum_{k=0}^{N-1}|X[k]|^2
-=
-N\sum_{n=0}^{N-1}|x[n]|^2
-$$
+```math
+    \sum_{k=0}^{N-1}|X[k]|^2
+    =
+    N\sum_{n=0}^{N-1}|x[n]|^2
+```
 
 or equivalently,
 
-$$
-\sum_{n=0}^{N-1}|x[n]|^2
-=
-\frac{1}{N}\sum_{k=0}^{N-1}|X[k]|^2
-$$
+```math
+    \sum_{n=0}^{N-1}|x[n]|^2
+    =
+    \frac{1}{N}\sum_{k=0}^{N-1}|X[k]|^2
+```
 
 Taking inspiration from the fact that the DFT is a linear algebraic operation, we can also understand the DFT in terms of polynomials, like we do with many other linear algebraic operations. This becomes a nice segue to our next topic, the Fast Fourier Transform (FFT).
 
@@ -128,13 +128,11 @@ The FFT does **not** produce an approximation of the DFT. It computes the same D
 
 Let's represent the input signal as the coefficients of a degree-$(N-1)$ polynomial:
 
-$$
-P(z)
-=
-x[0] + x[1]z + x[2]z^2 + \dots + x[N-1]z^{N-1}
-=
-\sum_{n=0}^{N-1}x[n]z^n
-$$
+```math
+    P(z)
+    = x[0] + x[1]z + x[2]z^2 + \dots + x[N-1]z^{N-1}
+    = \sum_{n=0}^{N-1}x[n]z^n
+```
 
 Computing the DFT is equivalent to evaluating $P(z)$ at the $N$ distinct $N$-th roots of unity,
 
@@ -154,15 +152,12 @@ These roots of unity sit symmetrically around the unit circle in the complex pla
 
 For even $N$,
 
-$$
-(\omega_N^k)^2
-=
-\left(e^{-j\frac{2\pi}{N}k}\right)^2
-=
-e^{-j\frac{2\pi}{N/2}k}
-=
-\omega_{N/2}^k
-$$
+```math
+    (\omega_N^k)^2
+    = \left(e^{-j\frac{2\pi}{N}k}\right)^2
+    = e^{-j\frac{2\pi}{N/2}k}
+    = \omega_{N/2}^k
+```
 
 Squaring an $N$-th root of unity produces an $(N/2)$-th root of unity.
 
@@ -170,15 +165,12 @@ Squaring an $N$-th root of unity produces an $(N/2)$-th root of unity.
 
 For even $N$,
 
-$$
-\omega_N^{k+N/2}
-=
-e^{-j\frac{2\pi}{N}(k+N/2)}
-=
-e^{-j\frac{2\pi k}{N}}e^{-j\pi}
-=
--\omega_N^k
-$$
+```math
+    \omega_N^{k+N/2}
+    = e^{-j\frac{2\pi}{N}(k+N/2)}
+    = e^{-j\frac{2\pi k}{N}}e^{-j\pi}
+    = -\omega_N^k
+```
 
 Thus, roots opposite each other across the unit circle are exact additive inverses.
 
@@ -186,18 +178,18 @@ Thus, roots opposite each other across the unit circle are exact additive invers
 
 We can split $P(z)$ into even- and odd-indexed terms:
 
-$$
-P(z)
-=
-\underbrace{
-\left(x[0]+x[2]z^2+\dots\right)
-}_{P_{\text{even}}(z^2)}
-+
-z\cdot
-\underbrace{
-\left(x[1]+x[3]z^2+\dots\right)
-}_{P_{\text{odd}}(z^2)}
-$$
+```math
+    P(z)
+    =
+    \underbrace{
+        \left(x[0]+x[2]z^2+\dots\right)
+    }_{P_{\text{even}}(z^2)}
+    +
+    z\cdot
+    \underbrace{
+        \left(x[1]+x[3]z^2+\dots\right)
+    }_{P_{\text{odd}}(z^2)}
+```
 
 Evaluating this at the root $\omega_N^k$ and using the squaring property,
 
@@ -207,13 +199,11 @@ $$
 
 gives
 
-$$
-X[k]
-=
-P_{\text{even}}(\omega_{N/2}^k)
-+
-\omega_N^kP_{\text{odd}}(\omega_{N/2}^k)
-$$
+```math
+    X[k]
+    = P_{\text{even}}(\omega_{N/2}^k)
+    + \omega_N^kP_{\text{odd}}(\omega_{N/2}^k)
+```
 
 ### Reusing Computations (The Butterfly Operation)
 
@@ -225,21 +215,17 @@ $$
 
 we can compute both $X[k]$ and $X[k+N/2]$ using the exact same sub-evaluations:
 
-$$
-\begin{aligned}
-X[k]
-&=
-P_{\text{even}}(\omega_{N/2}^k)
-+
-\omega_N^kP_{\text{odd}}(\omega_{N/2}^k)
-\\
-X[k+N/2]
-&=
-P_{\text{even}}(\omega_{N/2}^k)
--
-\omega_N^kP_{\text{odd}}(\omega_{N/2}^k)
-\end{aligned}
-$$
+```math
+    \begin{aligned}
+        X[k]
+        &= P_{\text{even}}(\omega_{N/2}^k)
+        + \omega_N^kP_{\text{odd}}(\omega_{N/2}^k)
+        \\
+        X[k+N/2]
+        &= P_{\text{even}}(\omega_{N/2}^k)
+        - \omega_N^kP_{\text{odd}}(\omega_{N/2}^k)
+    \end{aligned}
+```
 
 Notice that
 
@@ -277,11 +263,11 @@ $$
 
 becomes
 
-$$
-[x_0,x_2,x_4,x_6]
-\qquad
-[x_1,x_3,x_5,x_7]
-$$
+```math
+    [x_0,x_2,x_4,x_6]
+    \qquad
+    [x_1,x_3,x_5,x_7]
+```
 
 and each of those is split again:
 
@@ -291,28 +277,28 @@ $$
 
 Finally, the 2-point transforms are just additions and subtractions:
 
-$$
-\begin{aligned}
-A_0 &= x_0+x_4\\
-A_1 &= x_0-x_4\\
-A_2 &= x_2+x_6\\
-A_3 &= x_2-x_6
-\end{aligned}
-$$
+```math
+    \begin{aligned}
+        A_0 &= x_0+x_4\\
+        A_1 &= x_0-x_4\\
+        A_2 &= x_2+x_6\\
+        A_3 &= x_2-x_6
+    \end{aligned}
+```
 
 and similarly for the odd-indexed branch.
 
 These results are then combined through three stages of butterflies. Schematically:
 
-$$
-8\text{-point DFT}
-\rightarrow
-2\times4\text{-point DFTs}
-\rightarrow
-4\times2\text{-point DFTs}
-\rightarrow
-8\times1\text{-point DFTs}
-$$
+```math
+    8\text{-point DFT}
+    \rightarrow
+    2\times4\text{-point DFTs}
+    \rightarrow
+    4\times2\text{-point DFTs}
+    \rightarrow
+    8\times1\text{-point DFTs}
+```
 
 There are
 
@@ -323,7 +309,7 @@ $$
 stages, with $8/2=4$ butterflies per stage, for a total of
 
 $$
-4\times3=12
+4 \times 3 = 12
 $$
 
 butterflies.
