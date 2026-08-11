@@ -59,26 +59,26 @@ Whilst the claim that a "series" is a better name may be true, a discrete Fourie
 
 $$
 \begin{bmatrix}
-X[0]\\
-X[1]\\
-X[2]\\
-\vdots\\
-X[N-1]
+    X[0]\\
+    X[1]\\
+    X[2]\\
+    \vdots\\
+    X[N-1]
 \end{bmatrix}
 =
 \begin{bmatrix}
-1 & 1 & 1 & \dots & 1\\
-1 & \omega_N^1 & \omega_N^2 & \dots & \omega_N^{N-1}\\
-1 & \omega_N^2 & \omega_N^4 & \dots & \omega_N^{2(N-1)}\\
-\vdots & \vdots & \vdots & \ddots & \vdots\\
-1 & \omega_N^{N-1} & \omega_N^{2(N-1)} & \dots & \omega_N^{(N-1)(N-1)}
+    1 & 1 & 1 & \dots & 1\\
+    1 & \omega_N^1 & \omega_N^2 & \dots & \omega_N^{N-1}\\
+    1 & \omega_N^2 & \omega_N^4 & \dots & \omega_N^{2(N-1)}\\
+    \vdots & \vdots & \vdots & \ddots & \vdots\\
+    1 & \omega_N^{N-1} & \omega_N^{2(N-1)} & \dots & \omega_N^{(N-1)(N-1)}
 \end{bmatrix}
 \begin{bmatrix}
-x[0]\\
-x[1]\\
-x[2]\\
-\vdots\\
-x[N-1]
+    x[0]\\
+    x[1]\\
+    x[2]\\
+    \vdots\\
+    x[N-1]
 \end{bmatrix}
 $$
 
